@@ -1,0 +1,420 @@
+@import "tailwindcss";
+
+/* ============================================================
+   CryptoTrace Intelligence — Design System (Tailwind v4)
+   Extracted from Stitch UI (Dark Theme)
+   ============================================================ */
+
+@theme {
+  /* ---- Colors: Stitch Dark Theme ---- */
+  --color-background: #10131a;
+  --color-surface: #10131a;
+  --color-surface-dim: #10131a;
+  --color-surface-bright: #363941;
+  --color-surface-tint: #aac7ff;
+  --color-surface-container-lowest: #0b0e15;
+  --color-surface-container-low: #181c22;
+  --color-surface-container: #1c2027;
+  --color-surface-container-high: #272a31;
+  --color-surface-container-highest: #32353c;
+  --color-surface-variant: #32353c;
+
+  --color-primary: #aac7ff;
+  --color-primary-container: #3f90ff;
+  --color-on-primary: #002f64;
+  --color-on-primary-container: #002958;
+  --color-primary-fixed: #d6e3ff;
+  --color-primary-fixed-dim: #aac7ff;
+  --color-on-primary-fixed: #001b3e;
+  --color-on-primary-fixed-variant: #00458d;
+  --color-inverse-primary: #005db9;
+
+  --color-secondary: #c2c7d0;
+  --color-secondary-container: #42474f;
+  --color-on-secondary: #2c3138;
+  --color-on-secondary-container: #b1b5bf;
+  --color-secondary-fixed: #dee2ec;
+  --color-secondary-fixed-dim: #c2c7d0;
+  --color-on-secondary-fixed: #171c23;
+  --color-on-secondary-fixed-variant: #42474f;
+
+  --color-tertiary: #ffb784;
+  --color-tertiary-container: #e07304;
+  --color-on-tertiary: #502500;
+  --color-on-tertiary-container: #451f00;
+  --color-tertiary-fixed: #ffdcc6;
+  --color-tertiary-fixed-dim: #ffb784;
+  --color-on-tertiary-fixed: #301400;
+  --color-on-tertiary-fixed-variant: #713700;
+
+  --color-error: #ffb4ab;
+  --color-error-container: #93000a;
+  --color-on-error: #690005;
+  --color-on-error-container: #ffdad6;
+
+  --color-on-background: #e0e2ec;
+  --color-on-surface: #e0e2ec;
+  --color-on-surface-variant: #c1c6d6;
+  --color-inverse-surface: #e0e2ec;
+  --color-inverse-on-surface: #2d3038;
+
+  --color-outline: #8b919f;
+  --color-outline-variant: #414753;
+
+  /* Semantic severity scale */
+  --color-severity-critical: #ff4d4d;
+  --color-severity-high: #f97316;
+  --color-severity-medium: #eab308;
+  --color-severity-low: #22c55e;
+  --color-severity-info: #60a5fa;
+
+  /* ---- Typography ---- */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+
+  /* ---- Border Radius ---- */
+  --radius-sm: 0.25rem;
+  --radius-DEFAULT: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+}
+
+/* ============================================================
+   Base Styles
+   ============================================================ */
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* ============================================================
+   Typography Utilities (matching Stitch design system)
+   ============================================================ */
+
+.text-display-lg {
+  font-family: var(--font-sans);
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.text-headline-md {
+  font-family: var(--font-sans);
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.text-title-sm {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+.text-body-md {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.text-label-caps {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.text-mono-address {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+/* ============================================================
+   Material Symbols Configuration
+   ============================================================ */
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+}
+
+.material-symbols-filled {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+}
+
+/* ============================================================
+   Custom Scrollbars (forensic dark theme)
+   ============================================================ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0e15;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a313e;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* ============================================================
+   Stitch Surface Utility Classes
+   ============================================================ */
+
+.surface-level-1 {
+  background-color: #181c22;
+}
+
+.surface-level-2 {
+  background-color: #1c2027;
+}
+
+.glass-panel {
+  background-color: #181c22;
+  border: 1px solid #32353c;
+}
+
+/* ============================================================
+   Input & Button Patterns
+   ============================================================ */
+
+.input-field {
+  background-color: #0b0e15;
+  border: 1px solid #414753;
+  color: #e0e2ec;
+  border-radius: 0.25rem;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.input-field:focus {
+  border-color: #aac7ff;
+  background-color: #10131a;
+  outline: none;
+  box-shadow: 0 0 0 1px #aac7ff;
+}
+
+.btn-primary {
+  background-color: #3f90ff;
+  color: #001b3e;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(63, 144, 255, 0.2);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #5da3ff;
+  box-shadow: 0 4px 16px rgba(170, 199, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: #e0e2ec;
+  border: 1px solid #414753;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background-color: #32353c;
+  border-color: #8b919f;
+}
+
+/* ============================================================
+   Risk Badge Patterns
+   ============================================================ */
+
+.badge-critical {
+  background-color: rgba(255, 77, 77, 0.15);
+  color: #ff4d4d;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.badge-high {
+  background-color: rgba(249, 115, 22, 0.15);
+  color: #f97316;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.badge-medium {
+  background-color: rgba(234, 179, 8, 0.15);
+  color: #eab308;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.badge-low {
+  background-color: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+/* ============================================================
+   Selection & Focus
+   ============================================================ */
+
+::selection {
+  background-color: #3f90ff;
+  color: #001b3e;
+}
+
+:focus-visible {
+  outline: 2px solid #aac7ff;
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   Official Print & Court-Admissible PDF Styles
+   ============================================================ */
+@media print {
+  body {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 11pt !important;
+  }
+
+  /* Hide navigation, sidebars, buttons, and action bars */
+  aside,
+  nav,
+  header,
+  .no-print,
+  button,
+  [role="navigation"] {
+    display: none !important;
+  }
+
+  /* Reset layout constraints */
+  .ml-60 {
+    margin-left: 0 !important;
+  }
+
+  main {
+    margin-top: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    height: auto !important;
+  }
+
+  div {
+    overflow: visible !important;
+  }
+
+  /* Clean up surface card styling for crisp black/white laser printing */
+  .surface-level-1,
+  .surface-container,
+  .bg-surface-container,
+  .bg-surface-container-lowest,
+  .bg-background {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    border-color: #94a3b8 !important;
+    box-shadow: none !important;
+  }
+
+  .text-on-surface,
+  .text-on-surface-variant,
+  .text-outline {
+    color: #1e293b !important;
+  }
+
+  .text-primary {
+    color: #1d4ed8 !important;
+    font-weight: 700 !important;
+  }
+
+  .text-error {
+    color: #b91c1c !important;
+    font-weight: 700 !important;
+  }
+
+  .border-outline-variant {
+    border-color: #cbd5e1 !important;
+  }
+
+  .badge-critical,
+  .badge-high,
+  .badge-medium,
+  .badge-low {
+    border: 1px solid #64748b !important;
+    color: #0f172a !important;
+    background: #f1f5f9 !important;
+  }
+
+  /* Page break rules */
+  .page-break-inside-avoid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
