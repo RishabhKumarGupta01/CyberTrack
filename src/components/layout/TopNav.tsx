@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
-export const TopNav: React.FC = () => {
+interface TopNavProps {
+  onToggleSidebar?: () => void;
+  isSidebarOpen?: boolean;
+}
+
+export const TopNav: React.FC<TopNavProps> = ({ onToggleSidebar, isSidebarOpen }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
@@ -22,10 +27,19 @@ export const TopNav: React.FC = () => {
   };
 
   return (
-    <header className="bg-surface/90 backdrop-blur-md text-on-surface font-sans h-12 fixed top-0 right-0 left-60 border-b border-outline-variant flex items-center justify-between px-6 z-30 select-none">
-      {/* Left: Global Quick Search */}
-      <div className="flex-1 max-w-xl">
-        <form onSubmit={handleSearch} className="relative group">
+    <header className="bg-transparent text-on-surface font-sans h-16 flex items-center justify-between px-6 shrink-0 z-30 select-none gap-4">
+      {/* Left: Global Quick Search & Menu */}
+      <div className="flex-1 max-w-xl flex items-center gap-4">
+        {onToggleSidebar && (
+          <button
+            onClick={onToggleSidebar}
+            className="p-1.5 rounded-md hover:bg-surface-variant text-on-surface-variant transition-colors"
+            title={isSidebarOpen ? "Close Sidebar" : "Open Sidebar"}
+          >
+            <span className="material-symbols-outlined text-[24px]">menu</span>
+          </button>
+        )}
+        <form onSubmit={handleSearch} className="relative group w-full">
           <span className="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-[16px] text-on-surface-variant group-focus-within:text-primary transition-colors">
             search
           </span>
@@ -33,8 +47,8 @@ export const TopNav: React.FC = () => {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search TxID, Address (0x...), Case (INV-...), or VASP..."
-            className="w-full bg-surface-dim border border-outline-variant rounded-md py-1.5 pl-9 pr-14 text-on-surface placeholder:text-on-surface-variant/70 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-xs font-mono h-8"
+            placeholder="Search TxID, Address, Case, or VASP..."
+            className="w-full bg-surface-container-lowest border border-outline-variant/50 rounded-full py-2 pl-10 pr-14 text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm h-10 shadow-sm"
           />
           <div className="absolute right-2 top-1/2 -translate-y-1/2 flex gap-1 pointer-events-none">
             <span className="px-1.5 py-0.5 rounded bg-surface-variant text-[9px] font-mono text-on-surface-variant border border-outline-variant leading-none">
@@ -49,21 +63,14 @@ export const TopNav: React.FC = () => {
 
       {/* Right: Quick Actions & Profile */}
       <div className="flex items-center gap-4">
-        {/* System Health Badge */}
-        <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 bg-surface-container border border-outline-variant/60 rounded text-[11px] font-mono">
-          <span className="w-2 h-2 rounded-full bg-[#4caf50] animate-pulse"></span>
-          <span className="text-outline">Mainnet Nodes:</span>
-          <span className="text-on-surface font-medium">SYNCED</span>
-        </div>
-
         <div className="flex items-center gap-2">
           <button
             onClick={() => navigate('/assistant')}
-            className="flex items-center gap-1.5 px-2.5 py-1 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 rounded text-xs font-mono transition-colors"
+            className="flex items-center gap-2 px-3 py-1.5 bg-primary-container text-on-primary-container rounded-full text-sm font-semibold transition-colors hover:bg-primary-container/80 shadow-sm"
             title="Open Grounded Investigator AI Assistant"
           >
-            <span className="material-symbols-outlined text-[15px]">smart_toy</span>
-            <span className="hidden sm:inline font-semibold">AI Copilot</span>
+            <span className="material-symbols-outlined text-[18px]">smart_toy</span>
+            <span className="hidden sm:inline">AI Copilot</span>
           </button>
 
           <button
@@ -94,9 +101,9 @@ export const TopNav: React.FC = () => {
               alt="Investigator"
               className="w-6 h-6 rounded-md object-cover border border-outline-variant"
             />
-            <div className="text-left hidden lg:block">
-              <div className="text-xs font-semibold text-on-surface leading-none">{user.name}</div>
-              <div className="text-[10px] text-outline leading-tight mt-0.5">{user.role}</div>
+            <div className="text-left hidden lg:block ml-1">
+              <div className="text-sm font-semibold text-on-surface leading-none">{user.name}</div>
+              <div className="text-xs text-on-surface-variant leading-tight mt-1">{user.role}</div>
             </div>
           </div>
         )}

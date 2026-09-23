@@ -525,7 +525,7 @@ export const RealTimeMonitoring: React.FC = () => {
                     <span>{opt.label}</span>
                     <span
                       className={`text-[9px] px-1 py-0.2 rounded ${
-                        isSelected ? 'bg-black/30 text-white' : 'bg-surface-container-highest text-outline'
+                        isSelected ? 'bg-primary text-on-primary' : 'bg-surface-container-highest text-outline'
                       }`}
                     >
                       {count}

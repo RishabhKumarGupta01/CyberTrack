@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { AppLayout } from './components/layout/AppLayout';
 import { ProtectedRoute } from './components/common/ProtectedRoute';
 import { ErrorBoundary } from './components/common/ErrorBoundary';
+import { Landing } from './pages/Landing';
 import { Login } from './pages/Login';
 import { CommandCenter } from './pages/CommandCenter';
 import { NewInvestigation } from './pages/NewInvestigation';
@@ -22,7 +23,8 @@ export const App: React.FC = () => {
   return (
     <ErrorBoundary>
       <Routes>
-        {/* Public Login Route */}
+        {/* Public Routes */}
+        <Route path="/welcome" element={<Landing />} />
         <Route path="/login" element={<Login />} />
 
         {/* Protected Routes — All wrapped in AppLayout */}

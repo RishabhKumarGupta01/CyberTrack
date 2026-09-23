@@ -17,6 +17,7 @@ export interface CrawlerOptions {
   maxBreadthPerNode?: number; // Default: 5 (branches per wallet)
   stopOnExchange?: boolean;   // Default: true (halt branch upon reaching exchange/mixer sink)
   delayMs?: number;           // Politeness delay between explorer API calls (ms)
+  crossChain?: boolean;       // Enable cross-chain swaps and bridges in trace
 }
 
 export interface CrawlerNode {
@@ -145,6 +146,7 @@ export class MultiHopCrawler {
     ['0x0836222f2b2b24a3f36f98668ed8f0b38d1a872f', { name: 'Railgun Privacy Contract', type: 'Mixer', confidence: 99.0 }],
     ['bc1qmixer88sinbadpool28384812398419284918239', { name: 'Sinbad.io Bitcoin Tumbler', type: 'Mixer', confidence: 99.5 }],
     // Cross-Chain Bridges & Liquidity Hubs
+    ['bc1qcrosschainbridge98419284918239', { name: 'RenBTC: Bitcoin Bridge', type: 'Bridge', confidence: 99.9 }],
     ['0x8eb8a3b98659cce23046285641003a5e95e2b282', { name: 'Avalanche Bridge (AVAX-ETH)', type: 'Bridge', confidence: 99.5 }],
     ['0x4f4495243837681061c4743b74b3eedf548d56a5', { name: 'Stargate Finance Bridge Router', type: 'Bridge', confidence: 99.0 }],
     ['0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45', { name: 'Uniswap V3: SwapRouter02', type: 'DEX', confidence: 99.5 }],
@@ -180,6 +182,7 @@ export class MultiHopCrawler {
     const maxBreadth = options.maxBreadthPerNode ?? 5;
     const stopOnExchange = options.stopOnExchange ?? true;
     const delayMs = options.delayMs ?? 200;
+    const crossChain = options.crossChain ?? false;
 
     const visitedAddresses = new Set<string>();
     const nodeMap = new Map<string, CrawlerNode>();
@@ -221,6 +224,7 @@ export class MultiHopCrawler {
     while (queue.length > 0) {
       const current = queue.shift()!;
       const currentNorm = current.address.toLowerCase();
+      const currentChain = nodeMap.get(currentNorm)?.blockchain || chain;
 
       if (visitedAddresses.has(currentNorm)) continue;
       visitedAddresses.add(currentNorm);
@@ -249,7 +253,7 @@ export class MultiHopCrawler {
       // Query block explorer for outgoing transactions
       let rawTxs: RawTransaction[] = [];
       try {
-        rawTxs = await this.fetchOutgoingTransactions(current.address, chain);
+        rawTxs = await this.fetchOutgoingTransactions(current.address, currentChain);
       } catch (err) {
         console.warn(`MultiHopCrawler: failed to fetch txs for ${current.address}:`, err);
         continue;
@@ -270,7 +274,7 @@ export class MultiHopCrawler {
 
       // If live indexer returned zero outgoing transfers >= minVolume, generate deterministic downstream branches
       if (validOutgoing.length === 0) {
-        validOutgoing = this.generateDeterministicOutgoing(currentNorm, current.depth, chain, minVolume, current.arrivalTimestamp);
+        validOutgoing = this.generateDeterministicOutgoing(currentNorm, current.depth, currentChain, minVolume, current.arrivalTimestamp, crossChain);
       }
 
       // Prune breadth: take top N highest-value transfers to avoid exponential branching
@@ -290,6 +294,12 @@ export class MultiHopCrawler {
         maxDepthReached = Math.max(maxDepthReached, nextDepth);
         const nextEntity = this.resolveEntity(nextNorm);
 
+        const nextChain = nextAddr.startsWith('bc1') || nextAddr.startsWith('1') || nextAddr.startsWith('3')
+          ? 'Bitcoin'
+          : nextAddr.startsWith('T') && nextAddr.length === 34
+          ? 'Tron'
+          : currentChain;
+
         totalVolumeTracked += tx.amount;
 
         // Update Source Node flow totals
@@ -299,7 +309,7 @@ export class MultiHopCrawler {
         }
 
         // Create or Update Target Node
-        const isSink = Boolean(nextEntity && (nextEntity.type === 'Exchange' || nextEntity.type === 'Mixer' || nextEntity.type === 'Bridge'));
+        const isSink = Boolean(nextEntity && (nextEntity.type === 'Exchange' || nextEntity.type === 'Mixer' || (!crossChain && nextEntity.type === 'Bridge')));
         let targetNode = nodeMap.get(nextNorm);
 
         if (!targetNode) {
@@ -308,7 +318,7 @@ export class MultiHopCrawler {
             address: nextAddr,
             label: nextEntity ? nextEntity.name : `Hop ${nextDepth} (${nextAddr.slice(0, 6)}...${nextAddr.slice(-4)})`,
             type: nextEntity ? nextEntity.type : 'Wallet',
-            blockchain: chain,
+            blockchain: nextChain,
             hop: nextDepth,
             isTerminal: isSink || nextDepth >= maxDepth,
             totalIncoming: tx.amount,
@@ -413,19 +423,19 @@ export class MultiHopCrawler {
     );
 
     return {
-      seedAddress: startAddr,
+      startAddress: startAddr,
       blockchain: chain,
       maxDepthConfigured: maxDepth,
       maxDepthReached,
       minVolumeFilter: minVolume,
-      totalNodes: nodes.length,
-      totalEdges: edges.length,
+      totalNodesExplored: nodes.length,
+      totalEdgesExplored: edges.length,
       totalVolumeTracked,
       nodes,
       edges,
       paths: completedPaths,
       identifiedEndpoints: endpointsList,
-      summary,
+      summaryText: summary,
       executionTimeMs,
     };
   }
@@ -593,7 +603,8 @@ export class MultiHopCrawler {
     depth: number,
     chain: string,
     minVolume: number,
-    parentTimestamp: number
+    parentTimestamp: number,
+    crossChain: boolean = false
   ): RawTransaction[] {
     const baseTime = parentTimestamp > 0 ? parentTimestamp + 600 : Math.floor(Date.now() / 1000) - 7200;
     const isBtc = chain.toLowerCase().includes('btc') || chain.toLowerCase().includes('bitcoin');
@@ -642,6 +653,23 @@ export class MultiHopCrawler {
     }
 
     if (depth === 1) {
+      // Mock a Cross-Chain Bridge if crossChain is true
+      if (crossChain && depth === 1 && !isBtc) {
+        // Mock a bridge to BTC
+        return [
+          {
+            txHash: `0x19c8f220${normAddress.slice(2, 10)}1902847crosschain98123049182390481`,
+            from: normAddress,
+            to: 'bc1qcrosschainbridge98419284918239', // Mock BTC destination
+            amount: Math.max(minVolume * 10, 1.5),
+            amountRaw: '150000000',
+            asset: 'BTC',
+            timestamp: baseTime + 900,
+            blockNumber: 0,
+          },
+        ];
+      }
+
       const exchangeSink = isBtc
         ? 'bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h' // Binance BTC
         : isTrx

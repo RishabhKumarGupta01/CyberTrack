@@ -195,5 +195,6 @@ export const crawlerTraceSchema = z.object({
   maxBreadthPerNode: z.number().int().min(1).max(20).optional().default(5),
   stopOnExchange: z.boolean().optional().default(true),
   delayMs: z.number().int().min(0).max(5000).optional().default(200),
+  crossChain: z.boolean().optional().default(false),
 });
 

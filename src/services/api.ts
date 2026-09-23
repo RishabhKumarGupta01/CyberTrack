@@ -180,6 +180,7 @@ export interface CrawlerTraceRequest {
   maxBreadthPerNode?: number;
   stopOnExchange?: boolean;
   delayMs?: number;
+  crossChain?: boolean;
 }
 
 export interface CrawlerNode {

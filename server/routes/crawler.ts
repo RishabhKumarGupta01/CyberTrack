@@ -23,18 +23,7 @@ crawlerRouter.post(
   requirePermission('cases:read'),
   validateBody(crawlerTraceSchema),
   async (req: Request, res: Response): Promise<void> => {
-    const {
-      startAddress,
-      blockchain,
-      maxDepth,
-      minVolume,
-      maxBreadthPerNode,
-      stopOnExchange,
-      delayMs,
-    } = req.body;
-
-    try {
-      const result = await multiHopCrawler.trace({
+      const {
         startAddress,
         blockchain,
         maxDepth,
@@ -42,7 +31,20 @@ crawlerRouter.post(
         maxBreadthPerNode,
         stopOnExchange,
         delayMs,
-      });
+        crossChain,
+      } = req.body;
+  
+      try {
+        const result = await multiHopCrawler.trace({
+          startAddress,
+          blockchain,
+          maxDepth,
+          minVolume,
+          maxBreadthPerNode,
+          stopOnExchange,
+          delayMs,
+          crossChain,
+        });
 
       // Evidentiary audit log entry
       auditService.log({
@@ -55,8 +57,8 @@ crawlerRouter.post(
           blockchain: result.blockchain,
           maxDepthConfigured: maxDepth,
           maxDepthReached: result.maxDepthReached,
-          nodesDiscovered: result.totalNodes,
-          edgesDiscovered: result.totalEdges,
+          nodesDiscovered: result.totalNodesExplored,
+          edgesDiscovered: result.totalEdgesExplored,
           endpointsIdentified: result.identifiedEndpoints.map((e) => `${e.entityName} (Hop ${e.hop})`),
           executionTimeMs: result.executionTimeMs,
         },

@@ -213,7 +213,7 @@ export const NcrpSahyogHub: React.FC = () => {
           </div>
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded bg-primary-container flex items-center justify-center text-on-primary-container shadow-sm">
-              <span className="material-symbols-outlined text-[22px] text-white" style={{ fontVariationSettings: "'FILL' 1" }}>
+              <span className="material-symbols-outlined text-[22px] text-on-primary" style={{ fontVariationSettings: "'FILL' 1" }}>
                 shield
               </span>
             </div>
@@ -499,7 +499,7 @@ export const NcrpSahyogHub: React.FC = () => {
                             <div className="flex items-center gap-1.5">
                               <span>{comp.acknowledgmentNo}</span>
                               {comp.linkedCaseId && (
-                                <span className="text-[9px] bg-primary-container text-white px-1.5 py-0.2 rounded font-mono">
+                                <span className="text-[9px] bg-primary-container text-on-primary-container px-1.5 py-0.2 rounded font-mono">
                                   {comp.linkedCaseId}
                                 </span>
                               )}
@@ -881,7 +881,7 @@ export const NcrpSahyogHub: React.FC = () => {
                         Lead & Participating Agencies:
                       </span>
                       <div className="flex flex-wrap gap-1.5">
-                        <span className="bg-primary-container text-white text-[10px] font-semibold px-2 py-0.5 rounded">
+                        <span className="bg-primary-container text-on-primary-container text-[10px] font-semibold px-2 py-0.5 rounded">
                           ★ {ws.leadAgency}
                         </span>
                         {ws.participatingAgencies.map((agency, i) => (

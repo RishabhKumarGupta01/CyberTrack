@@ -33,13 +33,13 @@ export const CommandCenter: React.FC = () => {
   return (
     <div className="max-w-[1600px] mx-auto space-y-6">
       {/* Page Header */}
-      <div className="flex justify-between items-end border-b border-outline-variant pb-4">
+      <div className="flex justify-between items-end pb-6">
         <div>
-          <h2 className="text-[22px] font-semibold text-on-surface m-0 p-0 leading-tight tracking-tight">
+          <h2 className="text-3xl font-bold text-on-surface m-0 p-0 leading-tight tracking-tight">
             Command Center
           </h2>
-          <p className="text-on-surface-variant mt-1.5 font-mono text-[11px]">
-            Real-time synchronization with Supabase & On-Chain Ledgers
+          <p className="text-on-surface-variant mt-2 text-sm">
+            Overview of active investigations and system intelligence
           </p>
         </div>
         <div className="flex gap-3">
@@ -52,7 +52,7 @@ export const CommandCenter: React.FC = () => {
           </button>
           <button
             onClick={() => navigate('/investigations/new')}
-            className="px-4 py-1.5 bg-primary-container text-white rounded text-xs font-semibold flex items-center gap-2 hover:bg-primary-container/90 transition-colors focus:ring-2 focus:ring-primary focus:ring-offset-1 focus:ring-offset-background shadow-sm border border-transparent cursor-pointer"
+            className="px-4 py-1.5 bg-primary-container text-on-primary-container rounded text-xs font-semibold flex items-center gap-2 hover:bg-primary-container/90 transition-colors focus:ring-2 focus:ring-primary focus:ring-offset-1 focus:ring-offset-background shadow-sm border border-transparent cursor-pointer"
           >
             <span className="material-symbols-outlined text-[16px]">add</span>
             New Investigation
@@ -65,12 +65,12 @@ export const CommandCenter: React.FC = () => {
         {/* Top Row: Hero Stats */}
         <div className="col-span-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Stat 1 - Funds Traced */}
-          <div className="surface-level-1 rounded-md p-4 flex flex-col justify-between h-[120px] border border-outline-variant shadow-sm hover:border-outline transition-colors">
+          <div className="bg-surface-bright rounded-2xl p-5 flex flex-col justify-between h-[130px] border border-outline-variant/40 shadow-sm hover:shadow transition-shadow">
             <div className="flex justify-between items-start">
-              <p className="font-sans text-on-surface-variant text-[10px] font-semibold uppercase tracking-widest">
+              <p className="font-sans text-on-surface-variant text-sm font-medium">
                 Total Reported Loss Traced
               </p>
-              <span className="material-symbols-outlined text-primary text-[18px]">payments</span>
+              <span className="material-symbols-outlined text-primary text-[20px] bg-primary/10 p-1.5 rounded-lg">payments</span>
             </div>
             <div>
               <h3 className="text-2xl font-semibold text-on-surface leading-none font-mono tracking-tight mb-2.5">
@@ -84,12 +84,12 @@ export const CommandCenter: React.FC = () => {
           </div>
 
           {/* Stat 2 - Active Investigations */}
-          <div className="surface-level-1 rounded-md p-4 flex flex-col justify-between h-[120px] border border-outline-variant shadow-sm hover:border-outline transition-colors">
+          <div className="bg-surface-bright rounded-2xl p-5 flex flex-col justify-between h-[130px] border border-outline-variant/40 shadow-sm hover:shadow transition-shadow">
             <div className="flex justify-between items-start">
-              <p className="font-sans text-on-surface-variant text-[10px] font-semibold uppercase tracking-widest">
+              <p className="font-sans text-on-surface-variant text-sm font-medium">
                 Active Investigations
               </p>
-              <span className="material-symbols-outlined text-tertiary text-[18px]">folder_open</span>
+              <span className="material-symbols-outlined text-tertiary text-[20px] bg-tertiary/10 p-1.5 rounded-lg">folder_open</span>
             </div>
             <div>
               <h3 className="text-2xl font-semibold text-on-surface leading-none font-mono mb-2.5">
@@ -103,12 +103,12 @@ export const CommandCenter: React.FC = () => {
           </div>
 
           {/* Stat 3 - High-Risk Wallets */}
-          <div className="surface-level-1 rounded-md p-4 flex flex-col justify-between h-[120px] border border-outline-variant shadow-sm hover:border-outline transition-colors">
+          <div className="bg-surface-bright rounded-2xl p-5 flex flex-col justify-between h-[130px] border border-outline-variant/40 shadow-sm hover:shadow transition-shadow">
             <div className="flex justify-between items-start">
-              <p className="font-sans text-on-surface-variant text-[10px] font-semibold uppercase tracking-widest">
+              <p className="font-sans text-on-surface-variant text-sm font-medium">
                 Monitored Targets
               </p>
-              <span className="material-symbols-outlined text-error text-[18px]">warning</span>
+              <span className="material-symbols-outlined text-error text-[20px] bg-error/10 p-1.5 rounded-lg">warning</span>
             </div>
             <div>
               <h3 className="text-2xl font-semibold text-error leading-none font-mono mb-2.5">
@@ -122,12 +122,12 @@ export const CommandCenter: React.FC = () => {
           </div>
 
           {/* Stat 4 - VASP Matches */}
-          <div className="surface-level-1 rounded-md p-4 flex flex-col justify-between h-[120px] border border-outline-variant shadow-sm hover:border-outline transition-colors">
+          <div className="bg-surface-bright rounded-2xl p-5 flex flex-col justify-between h-[130px] border border-outline-variant/40 shadow-sm hover:shadow transition-shadow">
             <div className="flex justify-between items-start">
-              <p className="font-sans text-on-surface-variant text-[10px] font-semibold uppercase tracking-widest">
+              <p className="font-sans text-on-surface-variant text-sm font-medium">
                 VASP Directory Linkage
               </p>
-              <span className="material-symbols-outlined text-secondary text-[18px]">business</span>
+              <span className="material-symbols-outlined text-secondary text-[20px] bg-secondary/10 p-1.5 rounded-lg">business</span>
             </div>
             <div>
               <h3 className="text-2xl font-semibold text-on-surface leading-none font-mono mb-2.5">
@@ -149,7 +149,7 @@ export const CommandCenter: React.FC = () => {
             <div>
               <div className="flex items-center gap-2">
                 <h4 className="text-sm font-bold text-on-surface">National LEA Coordination Active: NCRP & SAHYOG</h4>
-                <span className="bg-primary-container text-white text-[9px] font-mono px-2 py-0.5 rounded font-bold uppercase">
+                <span className="bg-primary-container text-on-primary-container text-[9px] font-mono px-2 py-0.5 rounded font-bold uppercase">
                   1930 / I4C / BNSS
                 </span>
               </div>
@@ -177,15 +177,15 @@ export const CommandCenter: React.FC = () => {
         </div>
 
         {/* Middle Row: Recent Cases Table (8-col) + AI Insights (4-col) */}
-        <div className="col-span-12 lg:col-span-8 surface-level-1 rounded-md border border-outline-variant shadow-sm overflow-hidden">
-          <div className="flex items-center justify-between px-4 py-3 border-b border-outline-variant bg-surface-container-lowest">
-            <h3 className="text-xs font-semibold text-on-surface uppercase tracking-wide flex items-center gap-2">
-              <span className="material-symbols-outlined text-[16px] text-primary">troubleshoot</span>
+        <div className="col-span-12 lg:col-span-8 bg-surface-bright rounded-2xl border border-outline-variant/40 shadow-sm overflow-hidden">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-outline-variant/30">
+            <h3 className="text-base font-bold text-on-surface flex items-center gap-2">
+              <span className="material-symbols-outlined text-[18px] text-primary">troubleshoot</span>
               Active Investigations
             </h3>
             <button
               onClick={() => navigate('/investigations/new')}
-              className="text-[11px] text-primary hover:underline font-medium"
+              className="text-sm text-primary hover:underline font-medium"
             >
               + Create Case →
             </button>
@@ -193,16 +193,16 @@ export const CommandCenter: React.FC = () => {
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead>
-                <tr className="bg-surface-container border-b border-outline-variant/50">
-                  <th className="px-4 py-2 text-[10px] font-sans text-outline uppercase tracking-wider">Case ID</th>
-                  <th className="px-4 py-2 text-[10px] font-sans text-outline uppercase tracking-wider">Target Wallet</th>
-                  <th className="px-4 py-2 text-[10px] font-sans text-outline uppercase tracking-wider">Type</th>
-                  <th className="px-4 py-2 text-[10px] font-sans text-outline uppercase tracking-wider">Risk</th>
-                  <th className="px-4 py-2 text-[10px] font-sans text-outline uppercase tracking-wider">Status</th>
-                  <th className="px-4 py-2 text-[10px] font-sans text-outline uppercase tracking-wider">Amount</th>
+                <tr className="border-b border-outline-variant/20">
+                  <th className="px-6 py-3 text-xs font-sans text-on-surface-variant font-medium">Case ID</th>
+                  <th className="px-6 py-3 text-xs font-sans text-on-surface-variant font-medium">Target Wallet</th>
+                  <th className="px-6 py-3 text-xs font-sans text-on-surface-variant font-medium">Type</th>
+                  <th className="px-6 py-3 text-xs font-sans text-on-surface-variant font-medium">Risk</th>
+                  <th className="px-6 py-3 text-xs font-sans text-on-surface-variant font-medium">Status</th>
+                  <th className="px-6 py-3 text-xs font-sans text-on-surface-variant font-medium">Amount</th>
                 </tr>
               </thead>
-              <tbody className="text-xs">
+              <tbody className="text-sm">
                 {loadingCases ? (
                   <tr>
                     <td colSpan={6} className="px-4 py-8 text-center text-on-surface-variant font-mono text-xs">
@@ -227,9 +227,9 @@ export const CommandCenter: React.FC = () => {
                     <tr
                       key={id || i}
                       onClick={() => navigate(`/graph/${id}`)}
-                      className="border-b border-outline-variant/30 hover:bg-surface-variant transition-colors cursor-pointer group"
+                      className="border-b border-outline-variant/10 hover:bg-surface-container/50 transition-colors cursor-pointer group"
                     >
-                      <td className="px-4 py-2.5 font-mono text-primary font-medium group-hover:underline">{id}</td>
+                      <td className="px-6 py-4 text-primary font-semibold group-hover:underline">{id}</td>
                       <td
                         onClick={(e) => {
                           if (wallet && wallet !== 'N/A') {
@@ -243,18 +243,16 @@ export const CommandCenter: React.FC = () => {
                       </td>
                       <td className="px-4 py-2.5 text-on-surface capitalize">{type}</td>
                       <td className="px-4 py-2.5">
-                        <span className={`text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded font-mono ${
-                          risk === 'CRITICAL' ? 'bg-error/20 text-error' :
+                        <span className={`text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded font-mono ${risk === 'CRITICAL' ? 'bg-error/20 text-error' :
                           risk === 'HIGH' ? 'bg-error/10 text-error' :
-                          'bg-tertiary/10 text-tertiary'
-                        }`}>{risk}</span>
+                            'bg-tertiary/10 text-tertiary'
+                          }`}>{risk}</span>
                       </td>
                       <td className="px-4 py-2.5">
-                        <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded capitalize ${
-                          status === 'active' ? 'bg-primary/10 text-primary' :
+                        <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded capitalize ${status === 'active' ? 'bg-primary/10 text-primary' :
                           status === 'escalated' ? 'bg-error/10 text-error' :
-                          'bg-surface-variant text-on-surface-variant'
-                        }`}>{status}</span>
+                            'bg-surface-variant text-on-surface-variant'
+                          }`}>{status}</span>
                       </td>
                       <td className="px-4 py-2.5 font-mono text-on-surface font-medium">{amount}</td>
                     </tr>
@@ -266,10 +264,10 @@ export const CommandCenter: React.FC = () => {
         </div>
 
         {/* AI Quick Insights Panel */}
-        <div className="col-span-12 lg:col-span-4 surface-level-1 rounded-md border border-outline-variant shadow-sm p-4 flex flex-col justify-between gap-3">
+        <div className="col-span-12 lg:col-span-4 bg-surface-bright rounded-2xl border border-outline-variant/40 shadow-sm p-6 flex flex-col justify-between gap-4">
           <div>
-            <h3 className="text-xs font-semibold text-on-surface uppercase tracking-wide flex items-center gap-2 mb-3">
-              <span className="material-symbols-outlined text-[16px] text-primary">psychology</span>
+            <h3 className="text-base font-bold text-on-surface flex items-center gap-2 mb-4">
+              <span className="material-symbols-outlined text-[18px] text-primary">psychology</span>
               AI Investigator Insights
             </h3>
             <div className="space-y-2.5">
@@ -295,10 +293,10 @@ export const CommandCenter: React.FC = () => {
         </div>
 
         {/* Bottom Row: Recent Alerts (6-col) + Watchlist (6-col) */}
-        <div className="col-span-12 lg:col-span-6 surface-level-1 rounded-md border border-outline-variant shadow-sm overflow-hidden">
-          <div className="flex items-center justify-between px-4 py-3 border-b border-outline-variant bg-surface-container-lowest">
-            <h3 className="text-xs font-semibold text-on-surface uppercase tracking-wide flex items-center gap-2">
-              <span className="material-symbols-outlined text-[16px] text-error">notifications_active</span>
+        <div className="col-span-12 lg:col-span-6 bg-surface-bright rounded-2xl border border-outline-variant/40 shadow-sm overflow-hidden">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-outline-variant/30">
+            <h3 className="text-base font-bold text-on-surface flex items-center gap-2">
+              <span className="material-symbols-outlined text-[18px] text-error">notifications_active</span>
               Recent Alerts
             </h3>
             <span onClick={() => navigate('/alerts')} className="bg-error-container text-error text-[10px] font-bold px-1.5 py-0.5 rounded-full cursor-pointer">
@@ -316,9 +314,8 @@ export const CommandCenter: React.FC = () => {
                 onClick={() => navigate('/alerts')}
                 className="flex items-start gap-3 px-4 py-3 border-b border-outline-variant/30 hover:bg-surface-variant transition-colors cursor-pointer"
               >
-                <span className={`material-symbols-outlined text-[16px] mt-0.5 ${
-                  alert.severity === 'critical' ? 'text-error' : 'text-tertiary'
-                }`}>error</span>
+                <span className={`material-symbols-outlined text-[16px] mt-0.5 ${alert.severity === 'critical' ? 'text-error' : 'text-tertiary'
+                  }`}>error</span>
                 <div className="flex-1">
                   <div className="flex justify-between items-start">
                     <span className="text-[10px] font-sans text-outline uppercase tracking-wider">{alert.type.replace(/_/g, ' ')}</span>
@@ -332,14 +329,14 @@ export const CommandCenter: React.FC = () => {
         </div>
 
         {/* Monitored Wallets */}
-        <div className="col-span-12 lg:col-span-6 surface-level-1 rounded-md border border-outline-variant shadow-sm overflow-hidden">
-          <div className="flex items-center justify-between px-4 py-3 border-b border-outline-variant bg-surface-container-lowest">
-            <h3 className="text-xs font-semibold text-on-surface uppercase tracking-wide flex items-center gap-2">
-              <span className="material-symbols-outlined text-[16px] text-primary">monitor_heart</span>
+        <div className="col-span-12 lg:col-span-6 bg-surface-bright rounded-2xl border border-outline-variant/40 shadow-sm overflow-hidden">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-outline-variant/30">
+            <h3 className="text-base font-bold text-on-surface flex items-center gap-2">
+              <span className="material-symbols-outlined text-[18px] text-primary">monitor_heart</span>
               Active Watchlist
             </h3>
-            <span onClick={() => navigate('/monitoring')} className="text-[10px] text-primary hover:underline font-mono cursor-pointer">
-              Manage Watchlist (6 Targets) →
+            <span onClick={() => navigate('/monitoring')} className="text-sm text-primary hover:underline cursor-pointer font-medium">
+              Manage Watchlist (6) →
             </span>
           </div>
           <div className="flex flex-col">
@@ -360,9 +357,8 @@ export const CommandCenter: React.FC = () => {
                     <div className="text-[10px] text-outline">{w.chain} • Last tx: {w.lastTx}</div>
                   </div>
                 </div>
-                <span className={`text-[10px] font-bold px-2 py-0.5 rounded font-mono ${
-                  w.risk >= 80 ? 'bg-error/20 text-error' : 'bg-tertiary/10 text-tertiary'
-                }`}>Risk: {w.risk}/100</span>
+                <span className={`text-[10px] font-bold px-2 py-0.5 rounded font-mono ${w.risk >= 80 ? 'bg-error/20 text-error' : 'bg-tertiary/10 text-tertiary'
+                  }`}>Risk: {w.risk}/100</span>
               </div>
             ))}
           </div>

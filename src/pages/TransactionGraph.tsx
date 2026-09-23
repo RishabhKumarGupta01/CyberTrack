@@ -157,6 +157,7 @@ export const TransactionGraph: React.FC = () => {
   const [crawlerDepth, setCrawlerDepth] = useState<number>(3);
   const [crawlerMinVolume, setCrawlerMinVolume] = useState<number>(0.05);
   const [crawlerStopOnExchange, setCrawlerStopOnExchange] = useState<boolean>(true);
+  const [crawlerCrossChain, setCrawlerCrossChain] = useState<boolean>(false);
   const [crawlerError, setCrawlerError] = useState<string | null>(null);
   const [showCrawlerModal, setShowCrawlerModal] = useState<boolean>(false);
   const [selectedPathIndex, setSelectedPathIndex] = useState<number | null>(null);
@@ -493,6 +494,7 @@ export const TransactionGraph: React.FC = () => {
         maxDepth: crawlerDepth,
         minVolume: crawlerMinVolume,
         stopOnExchange: crawlerStopOnExchange,
+        crossChain: crawlerCrossChain,
       });
 
       setCrawlerResult(result);
@@ -815,15 +817,30 @@ export const TransactionGraph: React.FC = () => {
                     </div>
                   </div>
 
-                  <label className="flex items-center gap-2 text-[10px] text-on-surface-variant cursor-pointer select-none">
-                    <input
-                      type="checkbox"
-                      checked={crawlerStopOnExchange}
-                      onChange={(e) => setCrawlerStopOnExchange(e.target.checked)}
-                      className="accent-primary rounded cursor-pointer"
-                    />
-                    <span>Stop at VASP / CEX / Mixer sinks</span>
-                  </label>
+                  <div className="space-y-1.5">
+                    <label className="flex items-center gap-2 text-[10px] text-on-surface-variant cursor-pointer select-none">
+                      <input
+                        type="checkbox"
+                        checked={crawlerStopOnExchange}
+                        onChange={(e) => setCrawlerStopOnExchange(e.target.checked)}
+                        className="accent-primary rounded cursor-pointer"
+                      />
+                      <span>Stop at VASP / CEX / Mixer sinks</span>
+                    </label>
+
+                    <label className="flex items-center gap-2 text-[10px] text-on-surface-variant cursor-pointer select-none">
+                      <input
+                        type="checkbox"
+                        checked={crawlerCrossChain}
+                        onChange={(e) => setCrawlerCrossChain(e.target.checked)}
+                        className="accent-primary rounded cursor-pointer"
+                      />
+                      <span className="flex items-center gap-1">
+                        Cross-Chain Trace
+                        <span className="px-1 py-0.5 rounded text-[8px] bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 uppercase">Beta</span>
+                      </span>
+                    </label>
+                  </div>
 
                   {crawlerError && (
                     <div className="p-2 rounded bg-error/15 border border-error/30 text-error text-[10px] font-mono leading-tight">

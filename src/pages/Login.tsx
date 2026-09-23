@@ -30,7 +30,7 @@ export const Login: React.FC = () => {
     setErrorMessage(null);
 
     if (!email.trim() || !password.trim()) {
-      setErrorMessage('Investigator Identifier and Security Token are required.');
+      setErrorMessage('Nodal Officer ID and Password are required.');
       return;
     }
 
@@ -74,56 +74,52 @@ export const Login: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-background flex flex-col items-center justify-center p-4 sm:p-6 relative select-none overflow-x-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-primary/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-10 left-10 w-72 h-72 bg-primary-container/10 rounded-full blur-[100px] pointer-events-none" />
-
-      {/* Subtle Forensic Background Grid */}
-      <div 
-        className="absolute inset-0 opacity-[0.06] pointer-events-none" 
-        style={{ backgroundImage: 'radial-gradient(#8b919f 1.5px, transparent 1.5px)', backgroundSize: '32px 32px' }}
-      />
-
-      {/* Top Security Gateway Badge */}
-      <div className="mb-6 flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container border border-outline-variant/60 shadow-sm relative z-10 animate-fade-in">
-        <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse"></span>
-        <span className="text-[11px] font-mono tracking-wider text-outline uppercase">
-          SIH Secure Gateway • FIPS 140-3 Validated • TLS 1.3
-        </span>
+    <div className="min-h-screen w-full bg-background flex flex-col items-center justify-center select-none overflow-hidden relative">
+      {/* Indian Tricolor Header Strip */}
+      <div className="absolute top-0 left-0 right-0 h-2 w-full flex flex-col z-50">
+        <div className="flex-1 bg-secondary"></div>
+        <div className="flex-1 bg-white"></div>
+        <div className="flex-1 bg-tertiary"></div>
       </div>
 
-      {/* Login Main Container */}
-      <div className="w-full max-w-[460px] surface-level-1 border border-outline-variant/80 rounded-2xl p-6 sm:p-8 shadow-2xl relative z-10 backdrop-blur-sm">
-        {/* Brand Header */}
-        <div className="flex flex-col items-center text-center mb-6">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-container to-[#00458d] flex items-center justify-center text-white mb-3 shadow-lg shadow-primary-container/25 ring-1 ring-primary/30">
-            <span className="material-symbols-outlined text-[32px]" style={{ fontVariationSettings: "'FILL' 1" }}>
-              policy
-            </span>
-          </div>
+      {/* Subtle Watermark */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[1] z-0"
+        style={{
+          backgroundImage: 'url("/bg-monuments.jpg")',
+          backgroundPosition: 'center center',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover'
+        }}
+      />
 
-          <div className="flex items-center gap-2">
-            <h1 className="font-sans text-2xl sm:text-[26px] font-bold text-on-surface tracking-tight">
-              CryptoTrace
-            </h1>
-            <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold uppercase bg-primary/15 text-primary border border-primary/30 tracking-wider">
-              Intelligence
-            </span>
-          </div>
-          
-          <p className="text-xs text-on-surface-variant mt-2 font-mono">
-            Law Enforcement Blockchain Forensics Platform
-          </p>
+      {/* Login Portal */}
+      <div className="w-full max-w-[420px] relative z-10 bg-surface/95 backdrop-blur-md p-8 sm:p-12 rounded-3xl shadow-2xl border border-outline-variant">
+
+        {/* Top Security Gateway Badge */}
+        <div className="mb-8 flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container border border-outline-variant/60 shadow-sm animate-fade-in mx-auto w-max">
+          <span className="w-2 h-2 rounded-full bg-[#138808] animate-pulse"></span>
+          <span className="text-[11px] font-sans font-medium tracking-wider text-outline uppercase">
+            NIC Secure Gateway • e-Pramaan • TLS 1.3
+          </span>
         </div>
 
-        {/* Official Classification Ribbon */}
-        <div className="mb-5 px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant/50 flex items-center justify-between text-[10px] font-mono">
-          <div className="flex items-center gap-1.5 text-primary">
-            <span className="material-symbols-outlined text-[14px]">verified_user</span>
-            <span>RESTRICTED ACCESS</span>
-          </div>
-          <span className="text-outline uppercase tracking-wider">LAW ENFORCEMENT SENSITIVE</span>
+        {/* Brand Header */}
+        <div className="flex flex-col items-center text-center mb-8">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
+            alt="State Emblem of India"
+            className="h-20 mb-4 opacity-90"
+          />
+          <h1 className="font-sans text-xl sm:text-2xl font-bold text-on-surface tracking-tight uppercase">
+            CryptoTrace Portal
+          </h1>
+          <h2 className="text-sm font-bold text-primary mt-1 uppercase tracking-widest">
+            Authorized Access Only
+          </h2>
+          <p className="text-xs text-on-surface-variant mt-2 font-medium">
+            Nodal Officers & Law Enforcement Agencies
+          </p>
         </div>
 
         {/* Error Notification Banner */}
@@ -137,14 +133,14 @@ export const Login: React.FC = () => {
         {/* CAC / PIV Smart Card Token Modal */}
         {isLoading && authMethod === 'cac' && (
           <div className="mb-5 p-4 rounded-xl bg-surface-container border border-primary/40 space-y-3 text-center animate-fade-in">
-            <div className="w-10 h-10 mx-auto rounded-full bg-primary/20 flex items-center justify-center text-primary">
+            <div className="w-10 h-10 mx-auto rounded-full bg-primary/10 flex items-center justify-center text-primary">
               <span className="material-symbols-outlined text-[24px] animate-spin">sync</span>
             </div>
             <div className="space-y-1">
               <div className="text-xs font-mono font-semibold text-primary">
-                {cacStep === 'reading' && 'Reading Smart Card Hardware Chip...'}
-                {cacStep === 'verifying' && 'Validating Federal PIV Certificate...'}
-                {cacStep === 'success' && 'PIV-ID Verified: Special Agent S. Connor (FBI-CYBER-09)'}
+                {cacStep === 'reading' && 'Reading e-Pramaan Token...'}
+                {cacStep === 'verifying' && 'Validating NIC Certificate...'}
+                {cacStep === 'success' && 'Token Verified: Nodal Officer (I4C-HQ-01)'}
               </div>
               <p className="text-[11px] text-outline font-mono">Cryptographic handshake in progress...</p>
             </div>
@@ -155,7 +151,7 @@ export const Login: React.FC = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-1.5">
             <label className="text-[11px] font-sans font-semibold text-on-surface-variant uppercase tracking-wider block">
-              Investigator Identifier / Official Email
+              Gov.in Email / Nodal ID
             </label>
             <div className="relative">
               <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px] pointer-events-none">
@@ -167,8 +163,8 @@ export const Login: React.FC = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isLoading}
-                className="w-full input-field rounded-lg px-3 py-2.5 pl-10 text-xs font-mono text-on-surface focus:ring-1 focus:ring-primary placeholder:text-outline/50"
-                placeholder="analyst@agency.gov"
+                className="w-full input-field rounded-lg px-3 py-2.5 pl-10 text-xs font-mono text-on-surface focus:ring-1 focus:ring-primary placeholder:text-outline/50 bg-background"
+                placeholder="officer@nic.in"
               />
             </div>
           </div>
@@ -176,7 +172,7 @@ export const Login: React.FC = () => {
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
               <label className="text-[11px] font-sans font-semibold text-on-surface-variant uppercase tracking-wider block">
-                Security Token / Password
+                Portal Password
               </label>
               <button
                 type="button"
@@ -199,21 +195,21 @@ export const Login: React.FC = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 disabled={isLoading}
-                className="w-full input-field rounded-lg px-3 py-2.5 pl-10 pr-10 text-xs font-mono text-on-surface focus:ring-1 focus:ring-primary placeholder:text-outline/50"
-                placeholder="Enter password or select 1-click role"
+                className="w-full input-field rounded-lg px-3 py-2.5 pl-10 pr-10 text-xs font-mono text-on-surface focus:ring-1 focus:ring-primary placeholder:text-outline/50 bg-background"
+                placeholder="Enter secure password"
               />
             </div>
           </div>
 
           <div className="flex items-center justify-between text-xs text-outline pt-0.5">
             <label className="flex items-center gap-2 cursor-pointer select-none">
-              <input 
-                type="checkbox" 
+              <input
+                type="checkbox"
                 checked={rememberMe}
                 onChange={(e) => setRememberMe(e.target.checked)}
-                className="w-4 h-4 rounded bg-surface-container border border-outline-variant text-primary focus:ring-0 focus:ring-offset-0 cursor-pointer" 
+                className="w-4 h-4 rounded bg-surface-container border border-outline-variant text-primary focus:ring-0 focus:ring-offset-0 cursor-pointer"
               />
-              <span className="text-on-surface-variant text-[11px]">Remember workstation</span>
+              <span className="text-on-surface-variant text-[11px]">Remember terminal</span>
             </label>
             <button
               type="button"
@@ -222,7 +218,7 @@ export const Login: React.FC = () => {
               className="text-primary hover:text-primary-fixed hover:underline text-[11px] font-mono flex items-center gap-1 cursor-pointer transition-colors"
             >
               <span className="material-symbols-outlined text-[15px]">credit_card</span>
-              <span>CAC / PIV Card</span>
+              <span>Login with e-Pramaan Token</span>
             </button>
           </div>
 
@@ -234,32 +230,29 @@ export const Login: React.FC = () => {
             {isLoading && authMethod === 'form' ? (
               <>
                 <span className="material-symbols-outlined text-[18px] animate-spin">sync</span>
-                <span>Authenticating Credentials...</span>
+                <span>Authenticating...</span>
               </>
             ) : (
               <>
                 <span className="material-symbols-outlined text-[18px]">lock_open</span>
-                <span>Access Command Center</span>
+                <span>Secure Login</span>
               </>
             )}
           </button>
         </form>
 
         {/* Security Warning Notice */}
-        <div className="mt-5 p-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/40 text-[10px] text-outline text-center font-mono leading-relaxed">
-          <span>WARNING: UNLAWFUL ACCESS PROHIBITED UNDER 18 U.S.C. § 1030</span>
-          <div className="text-[9px] text-outline/70 mt-0.5">All transactions and forensic queries are audited & logged.</div>
+        <div className="mt-8 p-3 rounded-lg bg-surface-container border border-outline-variant/40 text-[10px] text-on-surface-variant text-center leading-relaxed">
+          <span className="font-bold text-error">WARNING:</span> UNLAWFUL ACCESS PROHIBITED.
+          <div className="text-[9px] text-outline mt-1 font-mono">
+            All transactions and forensic queries are audited by NIC.
+          </div>
         </div>
-      </div>
 
-      {/* Footer Info */}
-      <footer className="mt-6 text-center text-[11px] text-outline/60 font-mono relative z-10 flex items-center gap-4">
-        <span>CryptoTrace SIH v2.4.0</span>
-        <span>•</span>
-        <span>Node: synced (Block #20,891,440)</span>
-        <span>•</span>
-        <span className="text-[#22c55e]">Operations Normal</span>
-      </footer>
+        <footer className="mt-6 text-center text-[10px] text-outline font-mono">
+          <span>© 2024 Government of India. All rights reserved.</span>
+        </footer>
+      </div>
     </div>
   );
 };
